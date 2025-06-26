@@ -17,6 +17,11 @@
     const flourishStoryUrl = 'https://flo.uri.sh/story/3178410/embed';
 
     // FUNCTIONS
+    const enablePointerEvents = function() {
+        const stepsOverlay = document.querySelectorAll('#app .steps');
+        stepsOverlay[0].className += 'no-pointer';
+    }
+
     const updateStep = function(currentStep) {
         iframe = document.querySelector('#app .chart > iframe');
         iframe.src = iframe.src.replace(/#slide-.*/, '') + '#slide-' + currentStep;
@@ -38,6 +43,8 @@
             updateStep(currentStep);
         } else if (currentStep === 6) {
             updateStep(currentStep);
+            console.log('LAST STEP!')
+            enablePointerEvents();
         }
     };
 </script>
@@ -45,8 +52,13 @@
 <!-- MARKUP -->
 <section class="scrollyteller sticky">
     <header>
-        <h1>HED</h1>
-        <p class="subhead">TK TK TK</p>
+        <h1>VANCOUVER’S MUSQUEAM NAMES</h1>
+        <ul class="subhead legend">
+            <li><span class="dot purple-01"></span>Building</li>
+            <li><span class="dot yellow-01"></span>Park/Plaza</li>
+            <li><span class="dot blue-01"></span>Point of interest</li>
+            <li><span class="dot green-01"></span>Street</li>
+        </ul>
     </header>
     <div class="chart sticky">
         <!-- svelte-ignore a11y-missing-attribute -->
@@ -82,12 +94,25 @@
         top: 5vh;
         z-index: 1;
     }
-    .chart .no-pointer {
+    .no-pointer {
         pointer-events: none;
     }
     .steps {
         margin-top: -100%;
         position: relative;
         z-index: 2;
+    }
+    .legend {
+        display: flex;
+    }
+    .legend li {
+        margin: 0 3px;
+    }
+    .legend .dot {
+        border-radius: 50%;
+        display: inline-block;
+        height: 10px;
+        margin-right: 3px;
+        width: 10px
     }
 </style>
